@@ -16,7 +16,7 @@ to a web page which is rendered using the d3.js library.
 [[https://github.com/tdhock/animint][Animint]] is an R package that makes it easy to design data
 visualizations that can be both *anim*ated and *int*eractive.
 
-An "animint" is a named list in R that contains ggplots and options
+An "animint" is a named list in R that contains ggplots and [[https://github.com/tdhock/animint/wiki/Advanced-features-present-animint-but-not-in-ggplot2][options]]
 that specify how the interactive data viz should be rendered in a web
 browser:
 
