@@ -1,0 +1,87 @@
+1 hour tutorial about Animint
+
+** Abstract 
+
+Please bring a laptop if possible! I will explain how you can
+translate a sketch of plots on paper to the equivalent ggplot2 code,
+which the R package animint uses to generate an interactive data viz
+that you can publish/share on the web. The two new tools introduced by
+animint for interactive plot design are the clickSelects+showSelected
+keywords, which allow simple specification of a wide variety of
+interactive plots. Under the hood, animint converts the ggplot2 code
+to a web page which is rendered using the d3.js library.
+
+** What is animint? 5-10 minutes
+
+[[https://github.com/tdhock/animint][Animint]] is an R package that makes it easy to design data
+visualizations that can be both *anim*ated and *int*eractive.
+
+An "animint" is a named list in R that contains ggplots and options
+that specify how the interactive data viz should be rendered in a web
+browser:
+
+#+BEGIN_SRC R
+viz <-
+  list(plot1=ggplot(),
+       plot2=ggplot(),
+       option1=list(),
+       option2=list())
+#+END_SRC
+
+The difference with standard [[http://ggplot2.org/][ggplot2]] is that the ggplots can
+contain two new aesthetics that allow easy specification of
+interactivity:
+
+- *aes(clickSelects=variable)* means that clicking this geom will
+  change the currently selected value(s) of variable.
+
+- *aes(showSelected=variable)* means that only the subset of data
+  corresponding to the selected value(s) of variable.
+
+Once your animint is defined, you can view it on your computer via
+=animint2dir(viz)=, publish it as a GitHub gist via
+=animint2gist(viz)= (or [[https://github.com/tdhock/animint/wiki/Output-formats-for-sharing-animints][render it in other ways]]).
+
+After rendering, animint keeps track of the currently selected
+value(s) of each *selection variable* for that is specified as a
+clickSelects or showSelected variable.
+
+** Examples 10-15 minutes
+
+| data viz             | plots | selectors        | animated? | facets | source |
+|----------------------+-------+------------------+-----------+--------+--------|
+| [[http://bl.ocks.org/tdhock/raw/ec6e614fe6485b8afe43/][WorldBank]]            |     3 | country, year    | yes       | no     | [[https://github.com/tdhock/animint/blob/master/inst/examples/WorldBank.R][source]] |
+| [[http://bl.ocks.org/tdhock/raw/93a798530952338c87ac/][WorldBank-facets]]     |     2 | country, year    | yes       | yes    | [[https://github.com/tdhock/animint/blob/master/inst/examples/WorldBank.R][source]] |
+| [[http://bl.ocks.org/tdhock/raw/ffe5fe7f693564aba165/][JointZoom]]            |     1 | peak             | no        | yes    | [[https://github.com/tdhock/PeakSegJoint-paper/blob/master/figure-heuristic-algo.R][source]] |
+| [[http://bl.ocks.org/tdhock/raw/2b029fe9abc8eb300f9f/][Optimal Segmentation]] |     2 | segments, signal | no        | no     | [[https://github.com/tdhock/animint/blob/master/inst/examples/intreg.R][source]] |
+
+Draw a sketch of each data viz. Show aesthetic mapping and interactive
+variables for each geom in each plot. This sketch can be directly
+translated to ggplot2+animint code.
+
+** Re-design 20 minutes
+
+In the second 20 minutes of the presentation I will invite
+participants to work in pairs on one of the following topics about
+re-designing some existing data visualizations:
+
+- Analyze one of Karl Broman's data visualizations
+  https://github.com/kbroman/d3examples These were made using plain
+  d3.js (not animint). How many lines of JavaScript code did it take?
+  Can you propose a re-design using animint? If so how many lines of R
+  code do you think it would take? Are there any features of the plain
+  d3.js data viz that you think could not be expressed in animint? If
+  so could you propose an addition to animint that would allow those
+  features?
+- The animation package in R is another way to make a web-based
+  animated data
+  visualization. http://vis.supstat.com/categories.html#animation-ref
+  Take one of the animation examples and propose a re-design using
+  ggplot2+animint. What are the differences between the animint and
+  animation versions of the data viz, in terms of lines of R code, and
+  in terms of features?
+
+** Presentation of re-designs 20 minutes
+
+I will invite the participants to present the results of their
+re-design work.

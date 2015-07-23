@@ -1,1 +1,0 @@
-# animint-tutorial
